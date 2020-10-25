@@ -20,8 +20,8 @@
 					ng-minlength="config.minLength || undefined"
 					ng-maxlength="config.maxLength || undefined"
 					ng-pattern="config.pattern || undefined"
-					ng-change="config.changeFn(model[config.code], model)"
-					ng-blur="config.blurFn(model[config.code], model)"
+					ng-change="config.changeFn(model[config.code], model, config)"
+					ng-blur="config.blurFn(model[config.code], model, config)"
 					data-auto="{{config.code}}-text">
 			<textarea
 					ng-if="config.type === 'textarea'"
@@ -40,8 +40,8 @@
 					ng-maxlength="config.maxLength || undefined"
 					ng-pattern="config.pattern || undefined"
 					rows="{{config.textareaConfig.rows || 1}}"
-					ng-change="config.changeFn(model[config.code], model)"
-					ng-blur="config.blurFn(model[config.code], model)"
+					ng-change="config.changeFn(model[config.code], model, config)"
+					ng-blur="config.blurFn(model[config.code], model, config)"
 					data-auto="{{config.code}}-textarea" >
 			</textarea>
 			<input
@@ -60,8 +60,8 @@
 					ng-minlength="config.minLength"
 					ng-maxlength="config.maxLength"
 					ng-pattern="config.pattern || undefined"
-					ng-change="config.changeFn(model[config.code], model)"
-					ng-blur="config.blurFn(model[config.code], model)"
+					ng-change="config.changeFn(model[config.code], model, config)"
+					ng-blur="config.blurFn(model[config.code], model, config)"
 					data-auto="{{config.code}}-email" >
 			<input
 					ng-if="config.type === 'number'"
@@ -82,8 +82,8 @@
 					ng-minlength="config.minLength"
 					ng-maxlength="config.maxLength"
 					ng-pattern="config.pattern || undefined"
-					ng-change="config.changeFn(model[config.code], model)"
-					ng-blur="config.blurFn(model[config.code], model)"
+					ng-change="config.changeFn(model[config.code], model, config)"
+					ng-blur="config.blurFn(model[config.code], model, config)"
 					data-auto="{{config.code}}-number" >
 			<md-radio-group
 					ng-if="config.type === 'radio'"
@@ -91,7 +91,7 @@
 					name="{{config.code}}"
 					aria-label="{{config.name || config.code}}"
 					ng-class="{ 'md-warning': config.warning }"
-					ng-change="config.changeFn(model[config.code], model)"
+					ng-change="config.changeFn(model[config.code], model, config)"
 					ng-readonly="config.readonly || false"
 					ng-required="config.required || false"
 					ng-disabled="config.disabled || !editable" >
@@ -133,8 +133,8 @@
 					aria-label="{{config.name || config.code}}"
 					ng-disabled="config.disabled || !editable"
 					ng-required="config.required || false"
-					ng-change="config.changeFn(model[config.code], model)"
-					ng-blur="config.blurFn(model[config.code], model)"
+					ng-change="config.changeFn(model[config.code], model, config)"
+					ng-blur="config.blurFn(model[config.code], model, config)"
 					data-auto="{{config.code}}-select" >
 	      <md-option ng-if="config.selectConfig.optionType !== constants.OBJECT && config.selectConfig.valueKey && config.selectConfig.textKey" ng-repeat="option in config.selectConfig.options" ng-value="option[config.selectConfig.valueKey]" data-auto="{{config.code}}-{{option[config.selectConfig.valueKey]}}-select">
 	        {{option[config.selectConfig.textKey]}}
@@ -158,8 +158,8 @@
 					aria-label="{{config.name || config.code}}"
 					ng-disabled="config.disabled || !editable"
 					ng-required="config.required || false"
-					ng-change="config.changeFn(model[config.code], model)"
-					ng-blur="config.blurFn(model[config.code], model)">
+					ng-change="config.changeFn(model[config.code], model, config)"
+					ng-blur="config.blurFn(model[config.code], model, config)">
 	      <md-option ng-if="config.selectConfig.optionType !== constants.OBJECT && config.selectConfig.valueKey && config.selectConfig.textKey" ng-repeat="option in config.selectConfig.options" ng-value="option[config.selectConfig.valueKey]" data-auto="{{config.code}}-{{option[config.selectConfig.valueKey]}}-select">
 	        {{option[config.selectConfig.textKey]}}
 	      </md-option>
@@ -180,7 +180,7 @@
 	    		ng-model="model[config.code]"
 	    		aria-label="{{config.name || config.code}}"
 	    		ng-required="config.required || false"
-	    		ng-change="config.changeFn(model[config.code], model)"
+	    		ng-change="config.changeFn(model[config.code], model, config)"
 					data-auto="{{config.code}}-checkbox">
   		</md-checkbox>
 	    <md-autocomplete
@@ -194,9 +194,9 @@
 	        md-input-id="{{config.code}}"
 	        md-no-cache="config.autocompleteConfig.noCache"
 	        md-selected-item="config.autocompleteConfig.selectedItem"
-	        md-search-text-change="config.autocompleteConfig.searchTextChange(config.autocompleteConfig.searchText, model)"
+	        md-search-text-change="config.autocompleteConfig.searchTextChange(config.autocompleteConfig.searchText, model, config)"
 	        md-search-text="config.autocompleteConfig.searchText"
-	        md-selected-item-change="config.autocompleteConfig.selectedItemChange(item, model)"
+	        md-selected-item-change="config.autocompleteConfig.selectedItemChange(item, model, config)"
 	        md-items="item in config.autocompleteConfig.querySearch(config.autocompleteConfig.searchText, model, config)"
 	        md-item-text="item[config.autocompleteConfig.displayKey]"
 	        md-min-length="config.autocompleteConfig.minLength || 0"
@@ -226,7 +226,7 @@
   			md-max-date="(config.dateConfig && config.dateConfig.maxDate) ? config.dateConfig.maxDate : false"
   			ng-required="config.required || false"
         ng-disabled="config.disabled || !editable"
-        ng-change="config.changeFn(model[config.code], model)"
+        ng-change="config.changeFn(model[config.code], model, config)"
 				data-auto="{{config.code}}-datepicker" md-open-on-focus>
 		</md-datepicker>
 		<div class="checkbox-input" layout="row" flex layout-align="center stretch" ng-if="config.type === 'checkboxWithInput'">
@@ -239,7 +239,7 @@
 				ng-model="model[config.code]"
 				aria-label="{{config.name || config.code}}"
 				ng-required="config.required || false"
-				ng-change="config.changeFn(model[config.code], model)"
+				ng-change="config.changeFn(model[config.code], model, config)"
 				data-auto="{{config.code}}-checkbox">
 			</md-checkbox>
 			<md-input-container class="md-block" flex layout="column" layout-align="center stretch" md-no-float>
@@ -258,8 +258,8 @@
 						ng-minlength="config.inputBox.minLength || undefined"
 						ng-maxlength="config.inputBox.maxLength || undefined"
 						ng-pattern="config.inputBox.pattern || undefined"
-						ng-change="config.inputBox.changeFn(model[config.inputBox.code], model)"
-						ng-blur="config.inputBox.blurFn(model[config.inputBox.code], model)"
+						ng-change="config.inputBox.changeFn(model[config.inputBox.code], model, config)"
+						ng-blur="config.inputBox.blurFn(model[config.inputBox.code], model, config)"
 						data-auto="{{config.inputBox.code}}-checkbox-input">
 			</md-input-container>
 		</div>
@@ -273,7 +273,7 @@
 				ng-model="model[config.code]"
 				aria-label="{{config.name || config.code}}"
 				ng-required="config.required || false"
-				ng-change="config.changeFn(model[config.code], model)"
+				ng-change="config.changeFn(model[config.code], model, config)"
 				data-auto="{{config.code}}-checkbox">
 			</md-checkbox>
 			<md-input-container class="md-block" flex layout="column" layout-align="center stretch" md-no-float>
@@ -286,8 +286,8 @@
 						aria-label="{{config.dropdownBox.name || config.dropdownBox.code}}"
 						ng-disabled="!model[config.code]"
 						ng-required="config.dropdownBox.required || false"
-						ng-change="config.dropdownBox.changeFn(model[config.code], model)"
-						ng-blur="config.dropdownBox.blurFn(model[config.code], model)">
+						ng-change="config.dropdownBox.changeFn(model[config.code], model, config)"
+						ng-blur="config.dropdownBox.blurFn(model[config.code], model, config)">
 						<md-option ng-if="config.dropdownBox.selectConfig.optionType !== constants.OBJECT && config.dropdownBox.selectConfig.valueKey && config.dropdownBox.selectConfig.textKey" ng-repeat="option in config.dropdownBox.selectConfig.options" ng-value="option[config.dropdownBox.selectConfig.valueKey]" data-auto="{{config.code}}-{{option[config.selectConfig.valueKey]}}-checkbox-input">
 							{{option[config.dropdownBox.selectConfig.textKey]}}
 						</md-option>
