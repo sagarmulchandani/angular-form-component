@@ -22,7 +22,7 @@ Checkout the [example](https://snehilmodani.github.io/angular-form-component/) u
 
 # Run on local
 1. Use the below command to run the project locally.
-http-server -o -p <port-no>
+`http-server -o -p <port-no>`
 
 2. The example form will be open on `/docs`
 
